@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { fetchData } from "./api";
 function SelectComp(props) {
-  const [type, setRadio] = useState("Actor");
+  const [type, setRadio] = useState("actor");
   const [searchKeyWord, setSearchKeyWord] = useState("");
+  const [apiData, setapiData] = useState(null);
   useEffect(() => {
     const setTimeoutID = setTimeout(() => {
-      console.log("Logged");
+      const updatedData = fetchData(type, searchKeyWord);
+      console.log(updatedData);
+      //console.log(updatedData.length);
+      //setapiData(updatedData.length);
     }, 400);
     return () => {
       console.log("Cleaun Up");
@@ -26,13 +31,13 @@ function SelectComp(props) {
           <input
             type="radio"
             defaultChecked="checked"
-            value="Actor"
+            value="actor"
             name="type"
           />
           Actors
         </label>
         <label>
-          <input type="radio" value="Show" name="type" />
+          <input type="radio" value="show" name="type" />
           Shows
         </label>
       </div>
